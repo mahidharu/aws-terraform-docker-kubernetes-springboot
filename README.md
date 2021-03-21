@@ -20,3 +20,4 @@ Step: 2
 Step: 3
     # To destroy the configurations
     terraform destroy
+
