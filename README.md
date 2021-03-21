@@ -10,14 +10,13 @@ Prerequistits:
         AWS configure
 
 Step: 1
-    # To initilize the terraform configurations
-    terraform init
+# To initilize the terraform configurations
+terraform init
 
 Step: 2
-    # To apply the changes
-    terraform apply
+# To apply the changes
+terraform apply
 
 Step: 3
-    # To destroy the configurations
-    terraform destroy
-
+# To destroy the configurations
+terraform destroy
