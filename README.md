@@ -8,6 +8,7 @@ Prerequistits:
     1) Install AWScli and Terraform tools
     2) Configure AWS 
         AWS configure
+
 Step: 1
     # To initilize the terraform configurations
     terraform init
