@@ -26,7 +26,7 @@ pipeline {
 
     stage('Terraform Plan') {
       steps {
-        sh "terraform plan -out=tfplan -input=false -var-file=${params.environment}.tfvars'"
+        sh "terraform plan -out=tfplan -input=false -var-file=${params.environment}.tfvars"
       }
     }
 
