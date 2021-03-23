@@ -27,10 +27,17 @@ pipeline {
       }
     }
 
-    stage('Terraform Apply') {
+    //stage('Terraform Apply') {
+    //  steps {
+        //input 'Apply Plan'
+    //    sh "terraform apply -input=false tfplan"
+    //  }
+    // }
+
+    stage('Terraform Destroy') {
       steps {
         //input 'Apply Plan'
-        sh "terraform apply -input=false tfplan"
+        sh "terraform destroy"
       }
     }
   }
