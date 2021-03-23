@@ -7,8 +7,8 @@ pipeline {
 
   environment {
     AWS_REGION = "us-east-1"
-    AWS_ACCESS_KEY_ID     = credentials('Access Key ID')
-    AWS_SECRET_ACCESS_KEY = credentials('Secret Access Key')
+    AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     TF_IN_AUTOMATION      = '1'
   }
 
