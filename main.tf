@@ -10,8 +10,8 @@ terraform {
 }
 
 provider "aws" {
-  profile = "dev"
-  region  = "us-east-1"
+  profile = "${var.env}"
+  region  = "${var.region}"
 }
 
 module "ec2" {
