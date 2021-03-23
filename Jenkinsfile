@@ -12,11 +12,7 @@ pipeline {
   }
 
   stages {
-    stage('Build') {
-      steps {
 
-      }
-    }
     stage('Terraform Init') {
       steps {
         sh "terraform init -input=false"
