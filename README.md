@@ -17,3 +17,4 @@ terraform apply
 
 # Step: 3 - To destroy the configurations
 terraform destroy
+
