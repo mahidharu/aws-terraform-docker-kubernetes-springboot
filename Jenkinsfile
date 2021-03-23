@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   parameters {
-    string(name: 'environment', defaultValue: 'default', description: 'Workspace/environment file to use for deployment')
+    string(name: 'environment', defaultValue: 'dev', description: 'Workspace/environment file to use for deployment')
   }
 
   environment {
