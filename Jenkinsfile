@@ -37,7 +37,7 @@ pipeline {
     stage('Terraform Destroy') {
       steps {
         //input 'Apply Plan'
-        sh "terraform destroy"
+        sh "terraform destroy -input=false"
       }
     }
   }
