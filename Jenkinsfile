@@ -30,7 +30,14 @@ pipeline {
 
     stage ('Build') {
         steps {
-            echo 'This is a minimal pipeline.'
+            // Run the maven build
+            sh "mvn clean verify"
+        }
+    }
+
+    stage ('Package') {
+        steps {
+            echo 'Docker Build.'
             sh 'docker build -t rest-service:latest .'
         }
     }
