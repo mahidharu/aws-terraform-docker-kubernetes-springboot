@@ -32,3 +32,8 @@ override.tf.json
 # example: *tfplan*
 
 .DS_Store
+target/*
+.project
+.classpath
+settings.json
+org.eclipse.*
