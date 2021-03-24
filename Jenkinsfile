@@ -1,6 +1,8 @@
 pipeline {
-  agent any
-  agent { dockerfile true }
+
+  agent { 
+    dockerfile true 
+  }
 
   tools {
     maven 'Maven'
