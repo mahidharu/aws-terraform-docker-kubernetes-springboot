@@ -1,5 +1,5 @@
 pipeline {
-  agent none
+  agent any
 
   tools {
     maven 'Maven'
@@ -29,7 +29,6 @@ pipeline {
     }
 
     stage ('Build') {
-      agent any
         steps {
             echo 'This is a minimal pipeline.'
             sh 'docker build -t rest-service:latest .'
