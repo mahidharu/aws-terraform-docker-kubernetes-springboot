@@ -1,6 +1,11 @@
 pipeline {
   agent any
 
+  tools {
+    maven 'Maven 3.3.9'
+    jdk 'jdk8'
+  }
+
   parameters {
     string(name: 'environment', defaultValue: 'dev', description: 'Workspace/environment file to use for deployment')
   }
@@ -14,9 +19,18 @@ pipeline {
 
   stages {
 
-    stage('Build') {
+    stage ('Initialize') {
         steps {
-            sh 'mvn -B -DskipTests clean package'
+            sh '''
+                echo "PATH = ${PATH}"
+                echo "M2_HOME = ${M2_HOME}"
+            ''' 
+        }
+    }
+
+    stage ('Build') {
+        steps {
+            echo 'This is a minimal pipeline.'
         }
     }
 
