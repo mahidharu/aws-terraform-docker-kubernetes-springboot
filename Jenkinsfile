@@ -14,6 +14,12 @@ pipeline {
 
   stages {
 
+    stage('Build') {
+        steps {
+            sh 'mvn -B -DskipTests clean package'
+        }
+    }
+
     stage('Terraform Init') {
       steps {
         sh "terraform init -input=false"
@@ -27,18 +33,18 @@ pipeline {
       }
     }
 
-    //stage('Terraform Apply') {
-    //  steps {
-        //input 'Apply Plan'
-    //    sh "terraform apply -input=false tfplan"
-    //  }
-    // }
-
-    stage('Terraform Destroy') {
+    stage('Terraform Apply') {
       steps {
         //input 'Apply Plan'
-        sh "terraform destroy -auto-approve=true"
+        sh "terraform apply -input=false tfplan"
       }
     }
+
+    //stage('Terraform Destroy') {
+    //  steps {
+        //input 'Apply Plan'
+    //    sh "terraform destroy -auto-approve=true"
+    //  }
+    //}
   }
 }
