@@ -1,8 +1,5 @@
 pipeline {
-
-  agent { 
-    dockerfile true 
-  }
+  agent any
 
   tools {
     maven 'Maven'
@@ -32,8 +29,10 @@ pipeline {
     }
 
     stage ('Build') {
+      agent { dockerfile true }
         steps {
             echo 'This is a minimal pipeline.'
+            sh 'node --version'
         }
     }
 
