@@ -18,6 +18,10 @@ provider "aws" {
 //  source = "./modules/ec2"
 //}
 
+module "eks" {
+  source = "./modules/eks"
+}
+
 data "aws_availability_zones" "available" {}
 
 # Not required: currently used in conjunction with using
