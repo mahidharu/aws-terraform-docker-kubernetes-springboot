@@ -18,14 +18,6 @@ provider "aws" {
 //  source = "./modules/ec2"
 //}
 
-module "vpc" {
-  source = "./modules/vpc"
-}
-
-module "eks" {
-  source = "./modules/eks"
-}
-
 # Not required: currently used in conjunction with using
 # icanhazip.com to determine local workstation external IP
 # to open EC2 Security Group access to the Kubernetes cluster.
