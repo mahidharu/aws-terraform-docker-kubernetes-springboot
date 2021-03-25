@@ -97,7 +97,7 @@ pipeline {
         steps {
             echo 'Docker Build.'
             script{
-              docker.build("${SERVICE_NAME}")
+              docker.build("${REPO_NAME}")
             }
 
             echo 'Docker Tag and Push into Remote ECR.'
