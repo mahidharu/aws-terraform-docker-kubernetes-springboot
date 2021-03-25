@@ -71,8 +71,12 @@ pipeline {
             sh 'docker build -t rest-service:latest .'
             echo 'Docker Images.'
             sh 'docker images'
+            IMAGE_ID = sh (
+                script: 'docker images --filter="reference=rest-service" --quiet',
+                returnStatus: true
+            ) == 0
             echo 'Docker Tag.'
-            sh 'docker tag ${image_id} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:${image_tag}'
+            sh 'docker tag ${IMAGE_ID} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:latest'
             echo 'Docker Push.'
             sh 'docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}'
             echo 'Docker Images.'
