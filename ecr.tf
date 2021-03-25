@@ -2,7 +2,7 @@
 
 resource "aws_ecr_repository" "demo-repository" {
   name                 = "demo-repo"
-  image_tag_mutability = "IMMUTABLE"
+  image_tag_mutability = "MUTABLE"
 }
 
 resource "aws_ecr_repository_policy" "demo-repo-policy" {
