@@ -16,7 +16,7 @@ pipeline {
     AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
     AWS_ACCOUNT_ID = credentials('aws_account_id')
     REPO_NAME  = "demo-repo"
-    REMOTE_ECR = '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}'
+    REMOTE_ECR = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}"
     TF_IN_AUTOMATION  = '1'
   }
 
@@ -79,13 +79,13 @@ pipeline {
               ) == 0
             }
             echo 'Docker Tag. From Local to Reote'
-            sh 'docker tag -f rest-service:latest ${REMOTE_ECR}:latest'
+            sh "docker tag -f rest-service:latest ${REMOTE_ECR}:latest"
             echo 'ECR Login .'
             script {
               sh ('$(aws ecr get-login) || error_exit "ECR login failed."')
             }
             echo 'Docker Push into ECR.'
-            sh 'docker push ${REMOTE_ECR}:latest'
+            sh "docker push ${REMOTE_ECR}:latest"
             echo 'Remote Docker Images.'
             sh 'docker images'
         }
