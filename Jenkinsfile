@@ -103,7 +103,7 @@ pipeline {
             echo 'Docker Tag and Push into Remote ECR.'
             script{
               docker.withRegistry("https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com", "ecr:${AWS_REGION}:ecr-access") {
-                docker.image("${SERVICE_NAME}").push('latest')
+                docker.image("${REPO_NAME}").push('latest')
               }
             }
         }
