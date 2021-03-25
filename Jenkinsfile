@@ -67,7 +67,7 @@ pipeline {
     //  }
     //}
 
-    stage ('Package') {
+    /*stage ('Package') {
         steps {
             echo 'Docker Build.'
             sh 'docker build -t rest-servicse:latest .'
@@ -90,9 +90,9 @@ pipeline {
             echo 'Remote Docker Images.'
             sh 'docker images'
         }
-    }
+    }*/
 
-    /*stage ('Package') {
+    stage ('Package') {
         steps {
             echo 'Docker Build.'
             script{
@@ -106,7 +106,7 @@ pipeline {
               }
             }
         }
-    }*/
+    }
 
   }
 }
