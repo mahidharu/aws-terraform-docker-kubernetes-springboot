@@ -33,12 +33,12 @@ pipeline {
         }
     }
 
-    stage ('Build') {
+    /*stage ('Build') {
         steps {
             // Run the maven build
             sh "mvn clean verify"
         }
-    }
+    }*/
 
 
     stage('Terraform Init') {
@@ -93,7 +93,7 @@ pipeline {
         }
     }*/
 
-    stage ('Package') {
+    /*stage ('Package') {
         steps {
             echo 'Docker Build.'
             script{
@@ -107,7 +107,7 @@ pipeline {
               }
             }
         }
-    }
+    }*/
 
   }
 }

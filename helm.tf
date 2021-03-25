@@ -1,17 +1,18 @@
 provider "helm" {
   kubernetes {
-    host = data.aws_eks_cluster.default.endpoint
+    host                   = data.aws_eks_cluster.default.endpoint
+    #cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority.0.data)
+    #token                  = data.aws_eks_cluster_auth.default.token
   }
 }
 
 data "aws_eks_cluster" "default" {
-  name = var.aws_eks_cluster.name
+  name = aws_eks_cluster.name
 }
 
 data "aws_eks_cluster_auth" "default" {
-  name = var.aws_eks_cluster.name
+  name = aws_eks_cluster.name
 }
-
 
 resource "helm_release" "metric-server" {
   name       = "metric-server-release"
