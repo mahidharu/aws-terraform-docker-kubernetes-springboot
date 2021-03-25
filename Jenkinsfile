@@ -70,6 +70,31 @@ pipeline {
     stage ('Package') {
         steps {
             echo 'Docker Build.'
+            sh 'docker build -t rest-servicse:latest .'
+            echo 'Local Docker Images.'
+            sh 'docker images'
+            script {
+              IMAGE_ID = sh (
+                  script: 'docker images --filter="reference=rest-service" --quiet',
+                  returnStatus: true
+              ) == 0
+            }
+            echo 'Docker Tag. From Local to Reote'
+            sh "docker tag rest-service:latest ${REMOTE_ECR}:latest"
+            echo 'ECR Login .'
+            //script {
+            //  sh ('$(aws ecr get-login) || error_exit "ECR login failed."')
+            //}
+            echo 'Docker Push into ECR.'
+            sh "docker push ${REMOTE_ECR}:latest"
+            echo 'Remote Docker Images.'
+            sh 'docker images'
+        }
+    }
+
+    /*stage ('Package') {
+        steps {
+            echo 'Docker Build.'
             script{
               docker.build("${SERVICE_NAME}")
             }
@@ -81,7 +106,7 @@ pipeline {
               }
             }
         }
-    }
+    }*/
 
   }
 }
