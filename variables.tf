@@ -21,10 +21,10 @@ variable "service-name" {
   type    = string
 }
 
-variable "AWS_ACCOUNT_ID" {
+variable "aws_account_id" {
   type    = string
 }
 
-variable "REPO_NAME" {
+variable "repo_name" {
   type    = string
 }

@@ -20,8 +20,8 @@ pipeline {
     REMOTE_ECR = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}"
     SERVICE_NAME = 'rest-service'
     TF_IN_AUTOMATION  = '1'
-    TF_AWS_ACCOUNT_ID = "${AWS_ACCOUNT_ID}"
-    TF_REPO_NAME = "${REPO_NAME}"
+    TF_VAR_AWS_ACCOUNT_ID = "${AWS_ACCOUNT_ID}"
+    TF_VAR_REPO_NAME = "${REPO_NAME}"
   }
 
   stages {
