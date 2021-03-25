@@ -7,11 +7,11 @@ provider "helm" {
 }
 
 data "aws_eks_cluster" "default" {
-  name = aws_eks_cluster.name
+  name = aws_eks_cluster.demo.name
 }
 
 data "aws_eks_cluster_auth" "default" {
-  name = aws_eks_cluster.name
+  name = aws_eks_cluster.demo.name
 }
 
 resource "helm_release" "metric-server" {
