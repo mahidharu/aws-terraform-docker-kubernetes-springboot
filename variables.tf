@@ -22,11 +22,11 @@ variable "service-name" {
 }
 
 variable "aws_account_id" {
-  default     = ""
+  default     = "${TF_VAR_AWS_ACCOUNT_ID}"
   type    = string
 }
 
 variable "repo_name" {
-  default     = ""
+  default     = "${TF_VAR_REPO_NAME}"
   type    = string
 }
