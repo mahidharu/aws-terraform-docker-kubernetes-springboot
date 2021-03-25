@@ -70,11 +70,15 @@ pipeline {
     stage ('Package') {
         steps {
             echo 'Docker Build.'
-            docker.build("${SERVICE_NAME}")
+            script{
+              docker.build("${SERVICE_NAME}")
+            }
 
             echo 'Docker Tag and Push into Remote ECR.'
-            docker.withRegistry("${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com", "ecr:${AWS_REGION}:${REPO_NAME}") {
-              docker.image("${SERVICE_NAME}").push('latest')
+            script{
+              docker.withRegistry("${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com", "ecr:${AWS_REGION}:${REPO_NAME}") {
+                docker.image("${SERVICE_NAME}").push('latest')
+              }
             }
         }
     }
