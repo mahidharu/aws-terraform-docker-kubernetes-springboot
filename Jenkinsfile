@@ -79,7 +79,7 @@ pipeline {
               ) == 0
             }
             echo 'Docker Tag. From Local to Reote'
-            sh "docker tag -f rest-service:latest ${REMOTE_ECR}:latest"
+            sh "docker tag rest-service:latest ${REMOTE_ECR}:latest"
             echo 'ECR Login .'
             script {
               sh ('$(aws ecr get-login) || error_exit "ECR login failed."')
