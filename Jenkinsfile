@@ -14,7 +14,9 @@ pipeline {
     AWS_REGION  = "us-east-1"
     AWS_ACCESS_KEY_ID = credentials('jenkins-aws-secret-key-id')
     AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    AWS_ACCOUNT_ID = credentials('aws_account_id')
     TF_IN_AUTOMATION  = '1'
+    REPO_NAME  = "demo-repo"
   }
 
   stages {
@@ -32,13 +34,6 @@ pipeline {
         steps {
             // Run the maven build
             sh "mvn clean verify"
-        }
-    }
-
-    stage ('Package') {
-        steps {
-            echo 'Docker Build.'
-            sh 'docker build -t rest-service:latest .'
         }
     }
 
@@ -69,5 +64,21 @@ pipeline {
     //    sh "terraform destroy -auto-approve=true"
     //  }
     //}
+
+    stage ('Package') {
+        steps {
+            echo 'Docker Build.'
+            sh 'docker build -t rest-service:latest .'
+            echo 'Docker Images.'
+            sh 'docker images'
+            echo 'Docker Tag.'
+            sh 'docker tag ${image_id} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:${image_tag}'
+            echo 'Docker Push.'
+            sh 'docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}'
+            echo 'Docker Images.'
+            sh 'docker images'
+        }
+    }
+
   }
 }
