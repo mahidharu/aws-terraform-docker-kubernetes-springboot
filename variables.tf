@@ -20,3 +20,13 @@ variable "service-name" {
   default = "rest-service"
   type    = string
 }
+
+variable "aws_account_id" {
+  default     = ""
+  type    = string
+}
+
+variable "repo_name" {
+  default     = ""
+  type    = string
+}
