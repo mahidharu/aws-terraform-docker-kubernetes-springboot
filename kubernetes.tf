@@ -1,15 +1,17 @@
 
-data "terraform_remote_state" "eks" {
-  backend = "local"
 
-  config = {
-    path = "../learn-terraform-provision-eks-cluster/terraform.tfstate"
-  }
-}
+#data "terraform_remote_state" "eks" {
+#  backend = "local"
+
+#  config = {
+#    path = "../learn-terraform-provision-eks-cluster/terraform.tfstate"
+#  }
+#}
 
 
 data "aws_eks_cluster" "cluster" {
-  name = data.terraform_remote_state.eks.outputs.cluster_id
+#  name = data.terraform_remote_state.eks.outputs.cluster_id
+    name = aws_eks_cluster.demo.name
 }
 
 provider "kubernetes" {
