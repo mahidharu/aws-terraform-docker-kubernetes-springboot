@@ -15,6 +15,7 @@ pipeline {
     AWS_ACCESS_KEY_ID = credentials('jenkins-aws-secret-key-id')
     AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
     AWS_ACCOUNT_ID = credentials('aws_account_id')
+    ECR_ACCESS = credentials('ecr-access')
     REPO_NAME  = "demo-repo"
     REMOTE_ECR = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}"
     SERVICE_NAME = 'rest-service'
@@ -101,7 +102,7 @@ pipeline {
 
             echo 'Docker Tag and Push into Remote ECR.'
             script{
-              docker.withRegistry("${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com", "ecr:${AWS_REGION}:${REPO_NAME}") {
+              docker.withRegistry("${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com", "ecr:${AWS_REGION}:${ECR_ACCESS}") {
                 docker.image("${SERVICE_NAME}").push('latest')
               }
             }
