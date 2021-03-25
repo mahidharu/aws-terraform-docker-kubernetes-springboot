@@ -1,0 +1,66 @@
+# Default values for mfpro-auth.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Generic properties
+namespace: qa
+replicaCount: 1
+ingressEnabled: true
+appName: my-boot-service
+containerPort: 8080
+hasSecretVolume: true
+
+# Images
+image:
+  repository: my-first-boot/auth
+  tag: v1
+  pullPolicy: Always
+
+env:
+  configMap:
+    JAVA_OPTS:  -Dspring.config.location=/opt/appConfig/application-qa.properties -Dspring.profiles.active=qa -Dspring.hikaricp.config.location=/opt/appConfig/
+  secrets:
+    APPLICATION_NAME: my-boot-service
+
+# Container liveness and readyness
+springContainerHealthChecks:
+  livenessProbe:
+    httpGet:
+      path: /api/auth/ping
+      port: 8080
+    initialDelaySeconds: 180
+    timeoutSeconds: 1
+    periodSeconds: 15
+  readinessProbe:
+    httpGet:
+      path: /api/auth/ping
+      port: 8080
+    initialDelaySeconds: 180
+    timeoutSeconds: 1
+    periodSeconds: 15
+
+# Nginx ingress settings
+controller:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 1
+  service: 
+    enableHttp: true
+  stats:
+    enabled: true
+  metrics:
+    enabled: true
+
+# Ingress settigns
+ingress:
+  enabled: true
+  name: my-boot-service
+  rules:
+    - host: my-boot-service
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: my-boot-service-entrypoint
+            servicePort: 80
