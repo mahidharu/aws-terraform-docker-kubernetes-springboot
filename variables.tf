@@ -15,3 +15,8 @@ variable "cluster-name" {
   default = "terraform-eks-demo"
   type    = string
 }
+
+variable "service-name" {
+  default = "rest-service"
+  type    = string
+}
