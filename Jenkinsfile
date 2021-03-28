@@ -35,13 +35,53 @@ pipeline {
         }
     }
 
-    /*stage ('Build') {
+    stage ('Build') {
         steps {
             // Run the maven build
             sh "mvn clean verify"
         }
+    }
+
+     /*stage ('Package') {
+        steps {
+            echo 'Docker Build.'
+            sh 'docker build -t rest-servicse:latest .'
+            echo 'Local Docker Images.'
+            sh 'docker images'
+            script {
+              IMAGE_ID = sh (
+                  script: 'docker images --filter="reference=rest-service" --quiet',
+                  returnStatus: true
+              ) == 0
+            }
+            echo 'Docker Tag. From Local to Reote'
+            sh "docker tag rest-service:latest ${REMOTE_ECR}:latest"
+            echo 'ECR Login .'
+            //script {
+            //  sh ('$(aws ecr get-login) || error_exit "ECR login failed."')
+            //}
+            echo 'Docker Push into ECR.'
+            sh "docker push ${REMOTE_ECR}:latest"
+            echo 'Remote Docker Images.'
+            sh 'docker images'
+        }
     }*/
 
+    stage ('Package') {
+        steps {
+            echo 'Docker Build.'
+            script{
+              docker.build("${REPO_NAME}")
+            }
+
+            echo 'Docker Tag and Push into Remote ECR.'
+            script{
+              docker.withRegistry("https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com", "ecr:${AWS_REGION}:ecr-access") {
+                docker.image("${REPO_NAME}").push('latest')
+              }
+            }
+        }
+    }
 
     stage('Terraform Init') {
       steps {
@@ -69,47 +109,6 @@ pipeline {
     //    sh "terraform destroy -auto-approve=true"
     //  }
     //}
-
-    /*stage ('Package') {
-        steps {
-            echo 'Docker Build.'
-            sh 'docker build -t rest-servicse:latest .'
-            echo 'Local Docker Images.'
-            sh 'docker images'
-            script {
-              IMAGE_ID = sh (
-                  script: 'docker images --filter="reference=rest-service" --quiet',
-                  returnStatus: true
-              ) == 0
-            }
-            echo 'Docker Tag. From Local to Reote'
-            sh "docker tag rest-service:latest ${REMOTE_ECR}:latest"
-            echo 'ECR Login .'
-            //script {
-            //  sh ('$(aws ecr get-login) || error_exit "ECR login failed."')
-            //}
-            echo 'Docker Push into ECR.'
-            sh "docker push ${REMOTE_ECR}:latest"
-            echo 'Remote Docker Images.'
-            sh 'docker images'
-        }
-    }*/
-
-    /*stage ('Package') {
-        steps {
-            echo 'Docker Build.'
-            script{
-              docker.build("${REPO_NAME}")
-            }
-
-            echo 'Docker Tag and Push into Remote ECR.'
-            script{
-              docker.withRegistry("https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com", "ecr:${AWS_REGION}:ecr-access") {
-                docker.image("${REPO_NAME}").push('latest')
-              }
-            }
-        }
-    }*/
 
   }
 }
