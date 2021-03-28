@@ -29,11 +29,11 @@ provider "kubernetes" {
   }
 }
 
-resource "kubernetes_deployment" "nginx" {
+resource "kubernetes_deployment" "springboot" {
   metadata {
-    name = "scalable-nginx-example"
+    name = "scalable-springboot-example"
     labels = {
-      App = "ScalableNginxExample"
+      App = "ScalableSpringBootExample"
     }
   }
 
@@ -41,19 +41,19 @@ resource "kubernetes_deployment" "nginx" {
     replicas = 2
     selector {
       match_labels = {
-        App = "ScalableNginxExample"
+        App = "ScalableSpringBootExample"
       }
     }
     template {
       metadata {
         labels = {
-          App = "ScalableNginxExample"
+          App = "ScalableSpringBootExample"
         }
       }
       spec {
         container {
-          image = "nginx:1.7.8"
-          name  = "example"
+          image = "${var.AWS_ACCOUNT_ID}.dkr.ecr.${var.aws_region}.amazonaws.com/${REPO_NAME}:latest"
+          name  = "springboot"
 
           port {
             container_port = 80
@@ -75,13 +75,13 @@ resource "kubernetes_deployment" "nginx" {
   }
 }
 
-resource "kubernetes_service" "nginx" {
+resource "kubernetes_service" "springboot" {
   metadata {
-    name = "nginx-example"
+    name = "springboot-example"
   }
   spec {
     selector = {
-      App = kubernetes_deployment.nginx.spec.0.template.0.metadata[0].labels.App
+      App = kubernetes_deployment.springboot.spec.0.template.0.metadata[0].labels.App
     }
     port {
       port        = 80

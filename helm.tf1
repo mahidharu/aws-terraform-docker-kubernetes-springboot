@@ -19,6 +19,7 @@ resource "helm_release" "rest-service" {
   repository = "${var.AWS_ACCOUNT_ID}.dkr.ecr.${var.aws_region}.amazonaws.com" 
   chart      = "demo-repo:latest"
   namespace = "rest-service"
+  version    = "1.0.0"
 
   set {
     name  = "apiService.create"
