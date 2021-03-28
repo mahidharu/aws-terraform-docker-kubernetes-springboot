@@ -16,7 +16,7 @@ data "aws_eks_cluster_auth" "default" {
 
 resource "helm_release" "metric-server" {
   name       = "metric-server-release"
-  repository = "${AWS_ACCOUNT_ID}.dkr.ecr.${var.aws_region}.amazonaws.com/${REPO_NAME}" 
+  repository = "${var.AWS_ACCOUNT_ID}.dkr.ecr.${var.aws_region}.amazonaws.com/${var.REPO_NAME}" 
   chart      = "metrics-server"
   namespace = "kube-system"
 
