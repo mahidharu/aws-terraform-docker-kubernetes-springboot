@@ -14,11 +14,11 @@ data "aws_eks_cluster_auth" "default" {
   name = aws_eks_cluster.demo.name
 }
 
-resource "helm_release" "metric-server" {
+resource "helm_release" "rest-service" {
   name       = "${var.REPO_NAME}-release"
   repository = "${var.AWS_ACCOUNT_ID}.dkr.ecr.${var.aws_region}.amazonaws.com" 
   chart      = "${var.REPO_NAME}"
-  namespace = "kube-system"
+  namespace = "rest-service"
 
   set {
     name  = "apiService.create"
