@@ -56,7 +56,7 @@ resource "kubernetes_deployment" "springboot" {
           name  = "springboot"
 
           port {
-            container_port = 80
+            container_port = 8080
           }
 
           resources {
@@ -84,8 +84,8 @@ resource "kubernetes_service" "springboot" {
       App = kubernetes_deployment.springboot.spec.0.template.0.metadata[0].labels.App
     }
     port {
-      port        = 80
-      target_port = 80
+      port        = 8080
+      target_port = 8080
     }
 
     type = "LoadBalancer"

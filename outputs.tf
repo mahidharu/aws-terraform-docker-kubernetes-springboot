@@ -53,3 +53,7 @@ output "config_map_aws_auth" {
 output "kubeconfig" {
   value = local.kubeconfig
 }
+
+output "loadbalancer" {
+  value = "${kubernetes_service.springboot.metadata.0.name}"
+}
