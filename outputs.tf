@@ -55,5 +55,5 @@ output "kubeconfig" {
 }
 
 output "loadbalancer" {
-  value = "${kubernetes_service.springboot.metadata.0.name}"
+  value = kubernetes_service.springboot.metadata.0.name
 }
