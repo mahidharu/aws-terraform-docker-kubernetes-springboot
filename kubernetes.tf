@@ -52,7 +52,7 @@ resource "kubernetes_deployment" "springboot" {
       }
       spec {
         container {
-          image = "${var.AWS_ACCOUNT_ID}.dkr.ecr.${var.aws_region}.amazonaws.com/${REPO_NAME}:latest"
+          image = "${var.AWS_ACCOUNT_ID}.dkr.ecr.${var.aws_region}.amazonaws.com/${var.REPO_NAME}:latest"
           name  = "springboot"
 
           port {
