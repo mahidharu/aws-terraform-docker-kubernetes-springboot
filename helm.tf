@@ -15,9 +15,9 @@ data "aws_eks_cluster_auth" "default" {
 }
 
 resource "helm_release" "rest-service" {
-  name       = "${var.REPO_NAME}-release"
+  name       = "rest-service-release"
   repository = "${var.AWS_ACCOUNT_ID}.dkr.ecr.${var.aws_region}.amazonaws.com" 
-  chart      = "${var.REPO_NAME}"
+  chart      = "rest-service"
   namespace = "rest-service"
 
   set {
