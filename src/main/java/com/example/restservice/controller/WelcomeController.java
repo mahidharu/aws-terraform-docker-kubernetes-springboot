@@ -20,4 +20,9 @@ public class WelcomeController {
 		LocalDateTime localDateTime = LocalDateTime.now();
 		return localDateTime.toString();
 	}
+
+	@RequestMapping("/hello")
+	public String hello() {
+		return "Hello";
+	}
 }
