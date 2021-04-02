@@ -89,12 +89,12 @@ pipeline {
       }
     }
 
-    stage('Terraform Plan') {
+    /*stage('Terraform Plan') {
       steps {
         sh "terraform plan -out=tfplan -input=false -var-file=./params/${params.environment}/variables.tfvars"
         //sh "terraform plan -out=tfplan -input=false"
       }
-    }
+    }*/
 
     /*stage('Terraform Apply') {
       steps {
@@ -105,7 +105,7 @@ pipeline {
 
     stage('Terraform Destroy') {
       steps {
-        //input 'Apply Plan'
+        //input 'Destory'
         sh "terraform destroy -auto-approve=true"
       }
     }
