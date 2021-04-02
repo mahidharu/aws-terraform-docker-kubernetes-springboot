@@ -96,19 +96,19 @@ pipeline {
       }
     }
 
-    stage('Terraform Apply') {
+    /*stage('Terraform Apply') {
       steps {
         //input 'Apply Plan'
         sh "terraform apply -input=false tfplan"
       }
-    }
+    }*/
 
-    //stage('Terraform Destroy') {
-    //  steps {
+    stage('Terraform Destroy') {
+      steps {
         //input 'Apply Plan'
-    //    sh "terraform destroy -auto-approve=true"
-    //  }
-    //}
+        sh "terraform destroy -auto-approve=true"
+      }
+    }
 
   }
 }
