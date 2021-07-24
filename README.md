@@ -4,7 +4,7 @@ aws-terrafom-docker-eks-springboot
 Sample project to deploy Spring boot application using Terraform scripts with AWS Provider.
 Please refer to the steps below.
 
-# Prerequistits:
+# Prerequisites:
     1) Install AWScli and Terraform tools
     2) Configure AWS 
         AWS configure
